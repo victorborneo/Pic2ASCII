@@ -1,6 +1,5 @@
 import os
 from PIL import Image
-from fractions import Fraction
 
 
 def parse_areas(image, x, y):
