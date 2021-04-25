@@ -1,18 +1,44 @@
-def parse_areas(image, x, y):
+import numpy as np
+
+def reshape(array, x):
+    matrix = []
+    line = []
+
+    counter = 0
+    for value in array:
+        if counter >= x:
+            matrix.append(line)
+            line = [value]
+            counter = 1
+        else:
+            counter += 1
+            line.append(value)
+
+    matrix.append(line)
+    return matrix
+
+def parse_areas(image, x):
     array = []
     image_x, image_y = image.size
-    pix_vals = list(image.getdata())
-    size_y, size_x = int(image_y / y), int(image_x / x)
+    pixels = reshape(list(image.getdata()), image_x)
 
-    for i in range(y):
+    y = max(x // 3, 1)
+    if x > image_x:
+        x = image_x
+    if y > image_y:
+        y = image_y // 3
+
+    size_x, size_y = image_x // x, image_y // y
+
+    for i in range(image_y // size_y):
         line = []
 
-        for j in range(x):
+        for j in range(image_x // size_x):
 
             r, g, b, counter = 0, 0, 0, 0
             for k in range(size_y):
                 for l in range(size_x):
-                    pixel = pix_vals[j * size_x + i * image_x * size_y + l + k * image_x]
+                    pixel = pixels[i * size_y + k][j * size_x + l]
 
                     r += pixel[0]
                     g += pixel[1]
@@ -27,11 +53,11 @@ def parse_areas(image, x, y):
 def convert_to_ascii(array):
     ascii_ = ""
     pixel_ascii_map = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~i!lI;:,\"^`"
-    # pixel_ascii_map = "`^\",:;Il!i~+_-?][}{1)(|\\/tfjrxnuvczXYUJCLQ0OZmwqpdbkhao*#MW&8%B@$"
+
     for line in array:
         for r, g, b in line:
             brightness = 0.2126 * r + 0.7152 * g + 0.0722 * b
-            char = int(brightness * len(pixel_ascii_map) / 255)
+            char = int(brightness / 255 * len(pixel_ascii_map))
 
             ascii_ += pixel_ascii_map[char]
 
