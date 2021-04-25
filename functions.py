@@ -54,7 +54,8 @@ def parse_areas(image, x):
 
 def convert_to_ascii(array):
     ascii_ = ""
-    pixel_ascii_map = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~i!lI;:,\"^`"
+
+    pixel_ascii_map = "@%#*+=-:. "
 
     for line in array:
         for r, g, b in line:
