@@ -11,7 +11,7 @@ def main():
     width = 800 # The higher this value is, the better the output will be, but as satted above, high values will get weird results on Windows .txt files
 
     while True:
-        directory = input("Image file directory (Type a number to change width): ")  # Try using bg.jpg
+        directory = input("Image file directory (Type a number to change width): ")  # Try using bg.png
 
         if directory.isdigit():
             width = int(directory)
@@ -19,7 +19,7 @@ def main():
             continue
 
         try:
-            im = Image.open(directory)
+            im = Image.open(directory).convert("RGB")
         except (FileNotFoundError, OSError):
             print("File not found.")
             continue    
