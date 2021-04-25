@@ -34,6 +34,8 @@ def parse_areas(image, x):
         line = []
 
         for j in range(image_x // size_x):
+            if j > 1024:
+                break
 
             r, g, b, counter = 0, 0, 0, 0
             for k in range(size_y):
