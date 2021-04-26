@@ -22,7 +22,7 @@ def parse_areas(image, x):
     image_x, image_y = image.size
     pixels = reshape(list(image.getdata()), image_x)
 
-    y = max(x // 3, 1)
+    y = max(x * image_y // image_x // 3, 1)
     if x > image_x:
         x = image_x
     if y > image_y:
