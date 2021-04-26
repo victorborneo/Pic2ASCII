@@ -4,8 +4,8 @@ from functions import *
 
 def main():
     message = "DISCLAIMER: Windows .txt files automatically add new lines after 1024 characters, " \
-        "so using too high width values will crop the output. If you want the best quality output, " \
-        " nonetheless set width to the image X resolution and use another text reader."
+        "so using too high width values will crop the output. If you want the best quality output " \
+        "nonetheless, set width to the image X resolution and use another text reader."
     print(f"{'='*len(message)}\n{message}\nDefault width set to 800.\n{'='*len(message)}")
 
     width = 800 # The higher this value is, the better the output will be, but as satted above, high values will get weird results on Windows .txt files
